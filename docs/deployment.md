@@ -22,29 +22,26 @@ are copied into `dist/` by Vite.
 - Build command: `npm run build`
 - Publish directory: `dist`
 
-## Vercel
+## Vercel — live
 
-Vercel ignores `_headers`/`_redirects`. Add a `vercel.json`:
+The site is deployed on Vercel (project `terebra`, scope `ob1`):
 
-```json
-{
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" }
-      ]
-    }
-  ]
-}
+- Production: <https://terebra.vercel.app>
+- Also aliased at <https://terebra-ob1.vercel.app>
+
+Vercel ignores `_headers`/`_redirects`, so [`vercel.json`](../vercel.json) carries the
+SPA rewrite, the same security headers as `public/_headers` (including the CSP), and
+cache policy: hashed `/assets/*` immutable for a year, `/hero/*` for a day with
+stale-while-revalidate so replacing a photograph takes effect quickly.
+
+```bash
+vercel --prod          # deploy this directory to production
+vercel alias ls        # show the production URLs
+vercel inspect <url>   # status of one deployment
 ```
 
-Mirror the `Content-Security-Policy` value from `public/_headers` if you want CSP on
-Vercel too.
+Set `VITE_FORM_ENDPOINT` in the Vercel project's environment variables and redeploy —
+it is read at build time, so changing it requires a new build, not just a restart.
 
 ## Verifying a deploy
 
