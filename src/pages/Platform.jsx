@@ -3,6 +3,7 @@ import Container from '../components/Container.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
 import Card from '../components/Card.jsx'
 import RegisterForm from '../components/RegisterForm.jsx'
+import Reveal from '../components/Reveal.jsx'
 import { IconCheck } from '../components/icons/Icons.jsx'
 import { siteOverview, platformCapabilities } from '../data/platformStats.js'
 
@@ -27,23 +28,23 @@ const features = [
 
 function DataPanel() {
   return (
-    <div className="rounded-card bg-forest p-6 text-white">
+    <Reveal variant="right" delay={80} className="rounded-card bg-forest p-6 text-white shadow-lift lg:max-w-xl lg:justify-self-end">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-semibold text-white">Site overview</h3>
         <span className="text-xs text-white/50">This week</span>
       </div>
       <ul className="mt-5 space-y-4">
-        {siteOverview.map((row) => (
+        {siteOverview.map((row, i) => (
           <li key={row.label}>
             <div className="flex items-center justify-between text-sm">
               <span className="text-white/75">{row.label}</span>
-              <span className="font-semibold text-brand">{row.value}</span>
+              <span className="font-semibold text-brand tabular-nums">{row.value}</span>
             </div>
             {row.kind !== 'count' && (
               <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
                 <div
-                  className="h-full rounded-full bg-brand"
-                  style={{ width: `${row.percent}%` }}
+                  className="meter-fill h-full rounded-full bg-brand"
+                  style={{ '--meter': `${row.percent}%`, '--reveal-delay': `${200 + i * 90}ms` }}
                 />
               </div>
             )}
@@ -51,7 +52,7 @@ function DataPanel() {
         ))}
       </ul>
       <p className="mt-5 text-right text-[11px] text-white/40">Illustration of client reporting</p>
-    </div>
+    </Reveal>
   )
 }
 
@@ -83,29 +84,39 @@ export default function Platform() {
         />
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
-          {features.map((f) => (
-            <Card key={f.title} className="flex flex-col gap-2">
-              <h3 className="text-lg text-ink">{f.title}</h3>
-              <p className="text-sm leading-relaxed text-body">{f.body}</p>
-            </Card>
+          {features.map((f, i) => (
+            <Reveal key={f.title} delay={(i % 2) * 90}>
+              <Card hover className="flex h-full flex-col gap-2">
+                <h3 className="text-lg text-ink">{f.title}</h3>
+                <p className="text-sm leading-relaxed text-body">{f.body}</p>
+              </Card>
+            </Reveal>
           ))}
         </div>
       </Section>
 
       {/* Capabilities checklist + data panel */}
       <Section tone="muted">
-        <div className="grid items-start gap-10 lg:grid-cols-2">
+        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-20">
           <div>
-            <span className="eyebrow">Capabilities</span>
-            <h2 className="mt-3 text-3xl leading-[1.12] sm:text-4xl">
-              Proprietary software. Proven service.
-            </h2>
+            <Reveal variant="left">
+              <span className="eyebrow">Capabilities</span>
+              <h2 className="mt-3 text-3xl leading-[1.12] sm:text-4xl">
+                Proprietary software. Proven service.
+              </h2>
+            </Reveal>
             <ul className="mt-7 space-y-3.5">
-              {platformCapabilities.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-ink">
-                  <IconCheck width={18} height={18} className="mt-0.5 shrink-0 text-brand-600" />
+              {platformCapabilities.map((item, i) => (
+                <Reveal
+                  as="li"
+                  key={item}
+                  delay={60 + i * 60}
+                  variant="left"
+                  className="flex items-start gap-3 text-sm text-ink"
+                >
+                  <IconCheck width={18} height={18} className="mt-0.5 shrink-0 text-brand-700" />
                   <span>{item}</span>
-                </li>
+                </Reveal>
               ))}
             </ul>
           </div>
@@ -121,18 +132,22 @@ export default function Platform() {
           tone="light"
         />
         <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {whyItMatters.map((w) => (
-            <div key={w.title} className="rounded-card border border-white/10 bg-forest-800 p-6">
+          {whyItMatters.map((w, i) => (
+            <Reveal
+              key={w.title}
+              delay={i * 90}
+              className="rounded-card border border-white/10 bg-forest-800 p-6 transition-all duration-ui ease-soft hover:-translate-y-1 hover:border-brand/40 motion-reduce:transform-none"
+            >
               <h3 className="text-lg text-white">{w.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-white/70">{w.body}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </Section>
 
       {/* Register form */}
       <Section>
-        <div className="rounded-card border border-line bg-muted p-6 sm:p-10">
+        <Reveal variant="scale" className="rounded-card border border-line bg-muted p-6 sm:p-10 lg:p-12">
           <div className="max-w-2xl">
             <h2 className="text-2xl text-ink sm:text-3xl">Register on the platform</h2>
             <p className="mt-3 text-sm leading-relaxed text-body">
@@ -143,7 +158,7 @@ export default function Platform() {
           <div className="mt-8">
             <RegisterForm />
           </div>
-        </div>
+        </Reveal>
       </Section>
     </>
   )

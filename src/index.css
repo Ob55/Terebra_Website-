@@ -11,6 +11,16 @@
 @layer base {
   :root {
     color-scheme: light;
+
+    /* ---- Motion tokens -------------------------------------------------
+       One easing set, four durations. Everything on the site animates with
+       these; nothing invents its own curve. */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --dur-micro: 160ms; /* hover / press */
+    --dur-ui: 240ms; /* state change, menus */
+    --dur-section: 620ms; /* scroll reveals */
+    --dur-hero: 900ms; /* hero beats */
   }
 
   html {
@@ -44,6 +54,163 @@
 @layer components {
   /* Small green uppercase label above section titles */
   .eyebrow {
-    @apply inline-block text-xs font-semibold uppercase tracking-[0.14em] text-brand-600;
+    @apply inline-block text-xs font-semibold uppercase tracking-[0.14em] text-brand-800;
+  }
+
+  /* ---- Scroll reveal -------------------------------------------------
+     Applied by <Reveal>; `is-visible` is added once by an IntersectionObserver.
+     Delay comes from --reveal-delay so a group can stagger. */
+  .reveal {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+    transition:
+      opacity var(--dur-section) var(--ease-out),
+      transform var(--dur-section) var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal[data-variant='left'] {
+    transform: translate3d(-26px, 0, 0);
+  }
+
+  .reveal[data-variant='right'] {
+    transform: translate3d(26px, 0, 0);
+  }
+
+  .reveal[data-variant='scale'] {
+    transform: scale(0.96);
+  }
+
+  .reveal[data-variant='none'] {
+    transform: none;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---- Hero beats ----------------------------------------------------
+     Above the fold, so these run on mount rather than on intersection. */
+  .beat {
+    animation: beat-rise var(--dur-hero) var(--ease-out) both;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  .beat-photo {
+    animation: beat-photo 1400ms var(--ease-out) both;
+  }
+
+  /* Route change: the page body settles in under the fixed chrome */
+  .page-enter {
+    animation: page-in 420ms var(--ease-out) both;
+  }
+
+  /* Slow drift on the active hero photograph */
+  .hero-drift {
+    animation: hero-drift 9500ms linear both;
+  }
+
+  .map-ping {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: map-ping 3s var(--ease-out) infinite;
+  }
+
+  /* Meter fill used by the platform data panel: grows to --meter once the
+     surrounding .reveal has entered the viewport. */
+  .meter-fill {
+    width: 0;
+    transition: width 900ms var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-visible .meter-fill {
+    width: var(--meter, 0%);
+  }
+}
+
+@keyframes beat-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes beat-photo {
+  from {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Slow pulse on the live service markers in the Kenya map */
+@keyframes map-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  70%,
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+@keyframes hero-drift {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+/* ---- Reduced motion --------------------------------------------------
+   Content stays visible and in place; only the movement is dropped. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

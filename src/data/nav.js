@@ -16,6 +16,12 @@ export const footerCompanyLinks = [
 
 export const footerContactLinks = [
   { label: 'Contact us', to: '/contact' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com' },
-  { label: 'Privacy notice', to: '/contact' },
+  { label: 'Book a scoping call', to: '/scoping-call' },
+]
+
+// Small print in the footer's bottom row.
+export const footerLegalLinks = [
+  { label: 'Privacy notice', to: '/privacy' },
+  { label: 'Terms of use', to: '/terms' },
+  { label: 'Credits', to: '/credits' },
 ]

@@ -1,0 +1,5 @@
+# Terebra Agri Services
+User-agent: *
+Allow: /
+
+Sitemap: https://terebraagri.co.ke/sitemap.xml

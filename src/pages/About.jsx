@@ -1,6 +1,7 @@
 import Section from '../components/Section.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
 import Card from '../components/Card.jsx'
+import Reveal from '../components/Reveal.jsx'
 
 const pillars = [
   {
@@ -32,63 +33,63 @@ export default function About() {
         />
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {pillars.map((p) => (
-            <Card key={p.n} className="flex flex-col gap-3">
-              <span className="grid h-9 w-9 place-items-center rounded-lg bg-badge-bg text-sm font-bold text-brand-700">
-                {p.n}
-              </span>
-              <h3 className="text-lg text-ink">{p.title}</h3>
-              <p className="text-sm leading-relaxed text-body">{p.body}</p>
-            </Card>
+          {pillars.map((p, i) => (
+            <Reveal key={p.n} delay={i * 80}>
+              <Card hover className="group flex h-full flex-col gap-3">
+                <span className="grid h-9 w-9 place-items-center rounded-lg bg-badge-bg text-sm font-bold text-brand-800 transition-transform duration-ui ease-soft group-hover:scale-110 motion-reduce:transform-none">
+                  {p.n}
+                </span>
+                <h3 className="text-lg text-ink">{p.title}</h3>
+                <p className="text-sm leading-relaxed text-body">{p.body}</p>
+              </Card>
+            </Reveal>
           ))}
         </div>
       </Section>
 
       {/* Measurement statement */}
       <Section tone="muted" className="!py-14">
-        <span className="eyebrow">How we operate</span>
-        <h2 className="mt-3 max-w-3xl text-3xl leading-[1.12] sm:text-4xl">
-          If it isn’t measured, it didn’t happen.
-        </h2>
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-body">
-          Every operation, input and output is captured on our platform. Consents stay current,
-          field activity is logged with time and place, and each consignment is traceable from
-          field to dispatch, so performance is a matter of record, not recollection.
-        </p>
+        <SectionHeading
+          eyebrow="How we operate"
+          title="If it isn’t measured, it didn’t happen."
+          intro="Every operation, input and output is captured on our platform. Consents stay current, field activity is logged with time and place, and each consignment is traceable from field to dispatch, so performance is a matter of record, not recollection."
+        />
       </Section>
 
       {/* Track-record dark card */}
       <Section>
+        <Reveal variant="scale">
         <Card tone="dark" className="p-8 sm:p-10 lg:p-12">
           <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
             Track record
           </span>
-          <h2 className="mt-3 max-w-2xl text-3xl leading-[1.12] text-white sm:text-4xl">
+          <h2 className="mt-3 max-w-xl text-3xl leading-[1.12] text-white sm:text-4xl">
             Experience that has run bigger, harder programmes.
           </h2>
-          <div className="mt-10 grid gap-8 border-t border-white/10 pt-8 md:grid-cols-2">
+          <div className="mt-10 grid gap-8 border-t border-white/10 pt-8 md:grid-cols-2 md:justify-between lg:gap-24">
             <div>
               <h3 className="text-lg text-white">Independence</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/70">
+              <p className="mt-2 max-w-md text-sm leading-relaxed text-white/70">
                 We answer to the client engagement, not to input suppliers or intermediaries. Our
                 recommendations serve your programme and are documented as such.
               </p>
             </div>
             <div>
               <h3 className="text-lg text-white">Integrity of record</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/70">
+              <p className="mt-2 max-w-md text-sm leading-relaxed text-white/70">
                 The data behind the engagement is complete and honest. Good news and bad are on the
                 record; clients, auditors and financiers see the same view.
               </p>
             </div>
           </div>
         </Card>
+        </Reveal>
       </Section>
 
       {/* Vision / Mission */}
       <Section tone="muted">
-        <div className="grid gap-10 md:grid-cols-2">
-          <div>
+        <div className="grid gap-10 md:grid-cols-2 md:justify-between lg:gap-24">
+          <Reveal variant="left" className="md:max-w-xl">
             <span className="eyebrow">The vision</span>
             <h3 className="mt-3 text-2xl text-ink">Vision</h3>
             <p className="mt-3 text-sm leading-relaxed text-body">
@@ -96,8 +97,8 @@ export default function About() {
               land and capital into productive, well-run farming operations that stand the test of
               time.
             </p>
-          </div>
-          <div>
+          </Reveal>
+          <Reveal variant="right" delay={90} className="md:max-w-xl md:justify-self-end md:border-l md:border-line md:pl-10 lg:pl-16">
             <span className="eyebrow">Our commitment</span>
             <h3 className="mt-3 text-2xl text-ink">Mission</h3>
             <p className="mt-3 text-sm leading-relaxed text-body">
@@ -105,7 +106,7 @@ export default function About() {
               integrated services across the value chain and holding ourselves to the highest
               standard of measurement and transparency.
             </p>
-          </div>
+          </Reveal>
         </div>
       </Section>
     </>

@@ -1,0 +1,25 @@
+Hero photography credits
+========================
+
+These are placeholder photographs, used until Terebra supplies its own.
+Replace the files in this folder and update src/data/heroImages.js.
+
+maize-beans-1800.jpg / maize-beans-900.jpg
+  "School farm, Beans and Maize (6908799835).jpg" by SuSanA Secretariat
+  CC BY 2.0 — https://creativecommons.org/licenses/by/2.0
+  Source: https://commons.wikimedia.org/wiki/File:School_farm,_Beans_and_Maize_(6908799835).jpg
+
+intercrop-1800.jpg / intercrop-900.jpg
+  "Small-cropping-kenya (52428136678).jpg" by USDAgov
+  Public domain — 
+  Source: https://commons.wikimedia.org/wiki/File:Small-cropping-kenya_(52428136678).jpg
+
+tea-rows-1800.jpg / tea-rows-900.jpg
+  "Tea Farm in Kenya.jpg" by SeanTwice
+  CC0 — http://creativecommons.org/publicdomain/zero/1.0/deed.en
+  Source: https://commons.wikimedia.org/wiki/File:Tea_Farm_in_Kenya.jpg
+
+tea-landscape-1800.jpg / tea-landscape-900.jpg
+  "Tea plantation landscape in Cianda, Kiambu County 01.jpg" by Lebu Ayiga
+  CC BY 4.0 — https://creativecommons.org/licenses/by/4.0
+  Source: https://commons.wikimedia.org/wiki/File:Tea_plantation_landscape_in_Cianda,_Kiambu_County_01.jpg

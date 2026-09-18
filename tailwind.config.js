@@ -11,6 +11,8 @@ export default {
           500: '#6dcb45',
           600: '#57b733',
           700: '#3f9a22',
+          // darkest step — small text on white/muted (WCAG AA)
+          800: '#2f7d2f',
           // deep green used in the logo wordmark
           ink: '#1f6b2e',
         },
@@ -35,14 +37,23 @@ export default {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
-        container: '1152px',
+        container: '2000px',
+        wide: '2200px',
       },
       borderRadius: {
         card: '14px',
       },
       boxShadow: {
         card: '0 1px 2px rgba(17, 23, 20, 0.04)',
+        lift: '0 10px 30px -12px rgba(17, 23, 20, 0.22)',
         pop: '0 12px 40px rgba(17, 23, 20, 0.10)',
+      },
+      transitionTimingFunction: {
+        soft: 'var(--ease-out)',
+      },
+      transitionDuration: {
+        micro: '160ms',
+        ui: '240ms',
       },
       letterSpacing: {
         tightish: '-0.02em',

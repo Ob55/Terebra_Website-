@@ -30,7 +30,7 @@ export default function Field({
     <div className={className}>
       <label htmlFor={id} className={`mb-1.5 block text-sm font-medium ${labelColor}`}>
         {label}
-        {required && <span className="text-brand-700"> *</span>}
+        {required && <span className="text-brand-800"> *</span>}
       </label>
 
       {as === 'textarea' ? (

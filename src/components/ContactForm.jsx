@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Field from './Field.jsx'
 import Button from './Button.jsx'
 import { Honeypot, FormStatus } from './FormBits.jsx'
@@ -44,10 +45,14 @@ export default function ContactForm() {
       />
 
       <label className="flex items-start gap-2.5 text-xs leading-relaxed text-body">
-        <input type="checkbox" name="consent" required className="mt-0.5 h-4 w-4 rounded border-line text-brand-600" />
+        <input type="checkbox" name="consent" required className="mt-0.5 h-4 w-4 rounded border-line text-brand-700" />
         <span>
           I agree that Terebra Agri Services may use the information I provide to respond to my
-          enquiry. See our privacy notice.
+          enquiry. See our{' '}
+          <Link to="/privacy" className="font-medium text-brand-800 underline underline-offset-2">
+            privacy notice
+          </Link>
+          .
         </span>
       </label>
 

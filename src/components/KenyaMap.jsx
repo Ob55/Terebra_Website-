@@ -1,56 +1,142 @@
-import { locations } from '../data/locations.js'
+import { useState } from 'react'
+import { locations, reference } from '../data/locations.js'
+import { countyPaths, project, MAP_WIDTH, MAP_HEIGHT } from '../data/kenyaGeo.js'
+import useReveal from '../hooks/useReveal.js'
+
+// Counties where services are live get the deeper fill.
+const liveCounties = new Set(
+  locations.filter((l) => l.status === 'in-service' && l.county).map((l) => l.county),
+)
+
+const assessmentAreas = locations.flatMap((l) => l.areas ?? [])
+const sites = locations.filter((l) => l.status === 'in-service')
 
 /**
- * Stylised map of Kenya with plotted service points.
- * The outline is a simplified silhouette (decorative, not survey-accurate);
- * points are positioned by the percentage coords in locations.js.
+ * Map of Kenya drawn from real county boundaries (see data/kenyaGeo.js).
+ * Service sites and areas under assessment are plotted from their actual
+ * coordinates, so the pins land where the places are.
  */
 export default function KenyaMap({ className = '' }) {
-  return (
-    <div className={`relative overflow-hidden rounded-card bg-muted ${className}`}>
-      <svg viewBox="0 0 100 100" className="h-full w-full" role="img" aria-label="Map of Kenya showing Terebra service locations">
-        {/* Simplified Kenya silhouette */}
-        <path
-          d="M33 16 L60 14 L62 22 L74 30 L84 44 L70 58 L66 76 L58 86 L48 80 L44 66 L30 60 L22 50 L26 40 L20 32 L24 22 Z"
-          fill="#d8ead0"
-          stroke="#b9d6ac"
-          strokeWidth="0.8"
-          strokeLinejoin="round"
-        />
+  const ref = useReveal({ threshold: 0.25 })
+  const [active, setActive] = useState(null)
 
-        {/* Nairobi reference marker */}
-        <g>
-          <circle cx="50" cy="58" r="1.1" fill="#0e1f14" />
-          <text x="52.5" y="59.4" fontSize="3.4" fill="#0e1f14" fontWeight="600">
-            Nairobi
-          </text>
+  return (
+    <div ref={ref} className={`reveal relative ${className}`} data-variant="scale">
+      <svg
+        viewBox={`-2 -2 ${MAP_WIDTH + 4} ${MAP_HEIGHT + 4}`}
+        className="h-auto w-full overflow-visible"
+        role="img"
+        aria-label="Map of Kenya showing Terebra service locations in Makueni, Nyeri and Nakuru counties, and further production areas under assessment"
+      >
+        {/* Outer border: thick strokes are painted over by the fills below,
+            so only the national outline survives. */}
+        <g fill="none" stroke="#0e1f14" strokeWidth="0.9" strokeLinejoin="round">
+          {Object.entries(countyPaths).map(([name, d]) => (
+            <path key={name} d={d} />
+          ))}
         </g>
 
-        {/* Service + assessment points */}
-        {locations.map((loc) => {
-          const isService = loc.status === 'in-service'
+        {/* County fills + hairline internal boundaries */}
+        <g stroke="#b7d3a8" strokeWidth="0.16">
+          {Object.entries(countyPaths).map(([name, d]) => (
+            <path
+              key={name}
+              d={d}
+              fill={liveCounties.has(name) ? '#bfe3ae' : '#e8f1e1'}
+              className="transition-[fill] duration-ui ease-soft"
+            />
+          ))}
+        </g>
+
+        {/* Areas under assessment */}
+        {assessmentAreas.map((area) => {
+          const { x, y } = project(area.lon, area.lat)
           return (
             <circle
-              key={loc.name}
-              cx={loc.x}
-              cy={loc.y}
-              r={isService ? 1.8 : 1.6}
-              fill={isService ? '#57b733' : 'none'}
-              stroke={isService ? '#3f9a22' : '#57b733'}
-              strokeWidth="0.8"
-              strokeDasharray={isService ? '0' : '1.4 1'}
-            />
+              key={area.name}
+              cx={x}
+              cy={y}
+              r="1.5"
+              fill="#ffffff"
+              stroke="#3f9a22"
+              strokeWidth="0.7"
+              strokeDasharray="1.3 0.9"
+            >
+              <title>{area.name} — under assessment</title>
+            </circle>
+          )
+        })}
+
+        {/* Nairobi, for orientation */}
+        {(() => {
+          const { x, y } = project(reference.lon, reference.lat)
+          return (
+            <g>
+              <circle cx={x} cy={y} r="0.9" fill="#0e1f14" />
+              <text x={x + 2} y={y + 1.2} fontSize="3" fill="#0e1f14" fontWeight="600">
+                {reference.name}
+              </text>
+            </g>
+          )
+        })()}
+
+        {/* Live service sites */}
+        {sites.map((site, i) => {
+          const { x, y } = project(site.lon, site.lat)
+          const isActive = active === site.name
+          return (
+            <g
+              key={site.name}
+              onMouseEnter={() => setActive(site.name)}
+              onMouseLeave={() => setActive(null)}
+              className="cursor-default"
+            >
+              <circle
+                cx={x}
+                cy={y}
+                r="2"
+                fill="#57b733"
+                className="map-ping"
+                style={{ animationDelay: `${i * 800}ms` }}
+              />
+              <circle
+                cx={x}
+                cy={y}
+                r={isActive ? 2.4 : 1.9}
+                fill="#3f9a22"
+                stroke="#ffffff"
+                strokeWidth="0.7"
+                className="transition-all duration-ui ease-soft"
+              />
+              <text
+                x={x}
+                y={y + (site.labelDy ?? -3.4)}
+                fontSize="3.1"
+                fontWeight="700"
+                textAnchor="middle"
+                fill="#0e1f14"
+                className="transition-opacity duration-ui"
+                style={{ opacity: isActive ? 1 : 0.85 }}
+              >
+                {site.county}
+              </text>
+              <title>{site.name}</title>
+            </g>
           )
         })}
       </svg>
 
       {/* Legend */}
-      <div className="absolute bottom-3 left-3 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-body">
+      <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[11px] text-body">
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-brand-600" /> Services in use
+          <span className="h-2.5 w-2.5 rounded-full bg-brand-700" /> Services in use
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full border border-brand-600" /> Potential production areas
+          <span className="h-2.5 w-2.5 rounded-full border border-dashed border-brand-700 bg-white" />
+          Production areas under assessment
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-sm bg-[#bfe3ae]" /> Counties we operate in
         </span>
       </div>
     </div>
