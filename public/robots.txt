@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://terebraagri.co.ke/sitemap.xml
+Sitemap: https://terebra.vercel.app/sitemap.xml

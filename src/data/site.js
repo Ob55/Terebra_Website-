@@ -1,17 +1,21 @@
 // Canonical site details used for <title>, meta descriptions, canonical URLs
 // and the sitemap.
 //
-// NOTE: SITE_URL is inferred from the published contact address
-// (info@terebraagri.co.ke). Change it here — and in public/sitemap.xml and
-// public/robots.txt — if the site ships on a different domain.
-export const SITE_URL = 'https://terebraagri.co.ke'
+// SITE_URL is where the site actually answers today. Canonicals, og:url and
+// the sitemap are all built from it, so it must match the domain visitors and
+// crawlers reach — pointing it at a domain that does not resolve yet would
+// deindex the live site and break social previews.
+//
+// When terebraagri.co.ke is attached to this project, change it here AND in
+// index.html, public/robots.txt and public/sitemap.xml.
+export const SITE_URL = 'https://terebra.vercel.app'
 export const SITE_NAME = 'Terebra Agri Services'
 
 export const pageMeta = {
   '/': {
-    title: 'Terebra Agri Services — integrated agriculture in Kenya',
+    title: 'Terebra Agri Services | Integrated agriculture in Kenya',
     description:
-      'Farm in Kenya without building a farming company. Terebra runs land strategy, tenure, utilities, farm management and post-harvest delivery as one accountable service.',
+      'Farm in Kenya without building a farming company. Terebra runs land strategy, tenure, utilities, farm management and post-harvest delivery as one service.',
   },
   '/about': {
     title: 'About — Terebra Agri Services',

@@ -123,9 +123,11 @@ visible and in place.
 
 ## Before launch
 
-- **Domain** — `SITE_URL` in `src/data/site.js`, `public/robots.txt` and
-  `public/sitemap.xml` all assume `https://terebraagri.co.ke`. Change all three
-  together if that is wrong.
+- **Domain** — the site answers at `https://terebra.vercel.app`, and
+  `SITE_URL` in `src/data/site.js`, `index.html`, `public/robots.txt` and
+  `public/sitemap.xml` all point there so canonicals and social previews
+  resolve. When `terebraagri.co.ke` is attached to the Vercel project, change
+  all four together.
 - **Legal pages** — `/privacy` and `/terms` are drafts. Every `[BRACKETED]`
   placeholder needs a real value, and the text should be reviewed by someone
   qualified before launch.
