@@ -7,7 +7,7 @@
 //
 // Changing domains means changing it here AND in index.html,
 // public/robots.txt and public/sitemap.xml.
-export const SITE_URL = 'https://terebra.africa'
+export const SITE_URL = 'https://www.terebra.africa'
 export const SITE_NAME = 'Terebra Agri Services'
 
 export const pageMeta = {

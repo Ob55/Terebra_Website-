@@ -10,7 +10,7 @@
       name="description"
       content="Farm in Kenya without building a farming company. Terebra runs land strategy, tenure, utilities, farm management and post-harvest delivery as one service."
     />
-    <link rel="canonical" href="https://terebra.africa/" />
+    <link rel="canonical" href="https://www.terebra.africa/" />
 
     <!-- Icons -->
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -21,13 +21,13 @@
     <!-- Social preview -->
     <meta property="og:site_name" content="Terebra Agri Services" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://terebra.africa/" />
+    <meta property="og:url" content="https://www.terebra.africa/" />
     <meta property="og:title" content="Terebra Agri Services | Integrated agriculture in Kenya" />
     <meta
       property="og:description"
       content="Farm in Kenya without building a farming company. Terebra runs land strategy, tenure, utilities, farm management and post-harvest delivery as one service."
     />
-    <meta property="og:image" content="https://terebra.africa/og-image.jpg" />
+    <meta property="og:image" content="https://www.terebra.africa/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Terebra Agri Services — irrigated crop rows on a managed production site" />
@@ -38,7 +38,34 @@
       name="twitter:description"
       content="Farm in Kenya without building a farming company. Terebra runs land strategy, tenure, utilities, farm management and post-harvest delivery as one service."
     />
-    <meta name="twitter:image" content="https://terebra.africa/og-image.jpg" />
+    <meta name="twitter:image" content="https://www.terebra.africa/og-image.jpg" />
+
+    <!-- Structured data: keeps the site's identity and canonical host
+         consistent for search engines. Facts only — no invented details. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.terebra.africa/#organization",
+            "name": "Terebra Agri Services Ltd",
+            "url": "https://www.terebra.africa/",
+            "logo": "https://www.terebra.africa/icon-512.png",
+            "email": "info@terebra.africa",
+            "areaServed": "KE"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.terebra.africa/#website",
+            "name": "Terebra Agri Services",
+            "url": "https://www.terebra.africa/",
+            "publisher": { "@id": "https://www.terebra.africa/#organization" },
+            "inLanguage": "en"
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

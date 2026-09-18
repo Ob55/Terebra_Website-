@@ -123,7 +123,7 @@ visible and in place.
 
 ## Before launch
 
-- **Domain** — the site is `https://terebra.africa`. `SITE_URL` in
+- **Domain** — the site is `https://www.terebra.africa`. `SITE_URL` in
   `src/data/site.js`, `index.html`, `public/robots.txt` and
   `public/sitemap.xml` all point there; change all four together if it ever
   moves. Note the apex currently 308-redirects to `www.terebra.africa` in the
