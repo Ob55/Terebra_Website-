@@ -28,7 +28,7 @@ export default function Privacy() {
             Terebra Agri Services Ltd ([COMPANY REGISTRATION NUMBER]) of [REGISTERED ADDRESS],
             Nairobi, Kenya is the data controller for personal data submitted through this
             website. For any question about this notice, or to exercise the rights set out below,
-            contact us at <a href="mailto:info@terebraagri.co.ke">info@terebraagri.co.ke</a> or
+            contact us at <a href="mailto:info@terebra.africa">info@terebra.africa</a> or
             [DATA PROTECTION CONTACT].
           </p>
 
@@ -100,10 +100,10 @@ export default function Privacy() {
             <p className="mt-3 text-sm leading-relaxed text-body">
               Write to{' '}
               <a
-                href="mailto:info@terebraagri.co.ke"
+                href="mailto:info@terebra.africa"
                 className="font-medium text-brand-800 underline underline-offset-2"
               >
-                info@terebraagri.co.ke
+                info@terebra.africa
               </a>{' '}
               to ask for a copy of your data, to correct it, or to have it deleted.
             </p>

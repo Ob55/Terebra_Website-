@@ -129,9 +129,10 @@ visible and in place.
   moves. Note the apex currently 308-redirects to `www.terebra.africa` in the
   Vercel project settings — make the apex the primary domain there so the
   canonical URL serves directly instead of redirecting.
-- **Contact address** — the published email is still
-  `info@terebraagri.co.ke` (Contact page, privacy notice, terms). Update it
-  once mail is running on the new domain.
+- **Contact address** — the published email is `info@terebra.africa`
+  (Contact page, privacy notice, terms). Make sure that mailbox is receiving
+  before launch: the contact, register and scoping forms all point people
+  there.
 - **Legal pages** — `/privacy` and `/terms` are drafts. Every `[BRACKETED]`
   placeholder needs a real value, and the text should be reviewed by someone
   qualified before launch.

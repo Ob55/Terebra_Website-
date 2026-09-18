@@ -67,7 +67,7 @@ export default function Terms() {
           <h2>Contact</h2>
           <p>
             Questions about these terms:{' '}
-            <a href="mailto:info@terebraagri.co.ke">info@terebraagri.co.ke</a>.
+            <a href="mailto:info@terebra.africa">info@terebra.africa</a>.
           </p>
           </Prose>
         </Reveal>

@@ -6,7 +6,7 @@ import { IconPin, IconMail, IconPhone } from '../components/icons/Icons.jsx'
 
 const contactInfo = [
   { Icon: IconPin, title: 'Nairobi, Kenya', note: 'Serving sites across the country' },
-  { Icon: IconMail, title: 'info@terebraagri.co.ke', note: 'General and client enquiries' },
+  { Icon: IconMail, title: 'info@terebra.africa', note: 'General and client enquiries' },
   { Icon: IconPhone, title: '+254 726 535 597', note: 'Monday to Friday, 8am to 5pm EAT' },
 ]
 
