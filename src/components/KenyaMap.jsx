@@ -62,7 +62,7 @@ export default function KenyaMap({ className = '' }) {
               strokeWidth="0.7"
               strokeDasharray="1.3 0.9"
             >
-              <title>{area.name} — under assessment</title>
+              <title>{`${area.name} — under assessment`}</title>
             </circle>
           )
         })}

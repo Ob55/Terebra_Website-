@@ -46,7 +46,7 @@ export default function HeroSlideshow({ index = 0, className = '' }) {
             srcSet={srcSet}
             sizes={sizes}
             alt=""
-            fetchPriority={i === 0 ? 'high' : 'low'}
+            fetchpriority={i === 0 ? 'high' : 'low'}
             decoding="async"
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-soft ${
               isActive ? 'opacity-100' : 'opacity-0'

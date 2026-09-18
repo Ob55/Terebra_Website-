@@ -12,14 +12,16 @@ export default function useCountUp(display, duration = 1100) {
   const decimals = match && match[2].includes('.') ? match[2].split('.')[1].length : 0
 
   const ref = useRef(null)
-  const [value, setValue] = useState(target === null ? null : 0)
+  // Starts as null, which renders the real figure — so the prerendered HTML
+  // (and anyone without JavaScript) shows "40+", not "0+". The count-up only
+  // starts once the element scrolls into view.
+  const [value, setValue] = useState(null)
 
   useEffect(() => {
     const el = ref.current
     if (!el || target === null) return
 
     if (prefersReducedMotion() || typeof IntersectionObserver === 'undefined') {
-      setValue(target)
       return
     }
 
@@ -28,6 +30,7 @@ export default function useCountUp(display, duration = 1100) {
         if (!entries[0].isIntersecting) return
         observer.disconnect()
 
+        setValue(0)
         const start = performance.now()
         const tick = (now) => {
           const t = Math.min(1, (now - start) / duration)
