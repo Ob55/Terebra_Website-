@@ -14,7 +14,7 @@ export default function Terms() {
         eyebrow="Terms of use"
         as="h1"
         title="The terms on which we publish this site."
-        intro="These terms govern your use of terebraagri.co.ke. They do not govern any engagement with Terebra Agri Services Ltd, which is contracted separately in writing."
+        intro="These terms govern your use of terebra.africa. They do not govern any engagement with Terebra Agri Services Ltd, which is contracted separately in writing."
       />
 
       <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,44rem)_minmax(0,1fr)] lg:gap-16">

@@ -123,11 +123,15 @@ visible and in place.
 
 ## Before launch
 
-- **Domain** — the site answers at `https://terebra.vercel.app`, and
-  `SITE_URL` in `src/data/site.js`, `index.html`, `public/robots.txt` and
-  `public/sitemap.xml` all point there so canonicals and social previews
-  resolve. When `terebraagri.co.ke` is attached to the Vercel project, change
-  all four together.
+- **Domain** — the site is `https://terebra.africa`. `SITE_URL` in
+  `src/data/site.js`, `index.html`, `public/robots.txt` and
+  `public/sitemap.xml` all point there; change all four together if it ever
+  moves. Note the apex currently 308-redirects to `www.terebra.africa` in the
+  Vercel project settings — make the apex the primary domain there so the
+  canonical URL serves directly instead of redirecting.
+- **Contact address** — the published email is still
+  `info@terebraagri.co.ke` (Contact page, privacy notice, terms). Update it
+  once mail is running on the new domain.
 - **Legal pages** — `/privacy` and `/terms` are drafts. Every `[BRACKETED]`
   placeholder needs a real value, and the text should be reviewed by someone
   qualified before launch.

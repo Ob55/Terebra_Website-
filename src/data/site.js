@@ -1,14 +1,13 @@
 // Canonical site details used for <title>, meta descriptions, canonical URLs
 // and the sitemap.
 //
-// SITE_URL is where the site actually answers today. Canonicals, og:url and
-// the sitemap are all built from it, so it must match the domain visitors and
-// crawlers reach — pointing it at a domain that does not resolve yet would
-// deindex the live site and break social previews.
+// SITE_URL is the canonical home of the site. Canonicals, og:url and the
+// sitemap are all built from it, so it must match the domain visitors and
+// crawlers actually reach.
 //
-// When terebraagri.co.ke is attached to this project, change it here AND in
-// index.html, public/robots.txt and public/sitemap.xml.
-export const SITE_URL = 'https://terebra.vercel.app'
+// Changing domains means changing it here AND in index.html,
+// public/robots.txt and public/sitemap.xml.
+export const SITE_URL = 'https://terebra.africa'
 export const SITE_NAME = 'Terebra Agri Services'
 
 export const pageMeta = {

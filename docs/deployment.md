@@ -26,8 +26,8 @@ are copied into `dist/` by Vite.
 
 The site is deployed on Vercel (project `terebra`, scope `ob1`):
 
-- Production: <https://terebra.vercel.app>
-- Also aliased at <https://terebra-ob1.vercel.app>
+- Production: <https://terebra.africa>
+- Also aliased at <https://terebra.africa>
 
 Vercel ignores `_headers`/`_redirects`, so [`vercel.json`](../vercel.json) carries the
 SPA rewrite, the same security headers as `public/_headers` (including the CSP), and

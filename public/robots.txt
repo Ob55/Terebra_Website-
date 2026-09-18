@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://terebra.vercel.app/sitemap.xml
+Sitemap: https://terebra.africa/sitemap.xml
